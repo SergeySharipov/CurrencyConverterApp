@@ -1,11 +1,11 @@
 package ca.sharipov.currencyconverterapp.data
 
 import ca.sharipov.currencyconverterapp.data.model.CurrencyResponse
-import retrofit2.Response
-import retrofit2.http.GET
+import io.ktor.client.*
+import io.ktor.client.request.*
+import javax.inject.Inject
 
-interface CurrencyApi {
+class CurrencyApi @Inject constructor(private val client: HttpClient) {
 
-    @GET("/latest")
-    suspend fun getRates(): Response<CurrencyResponse>
+    suspend fun getRates(): CurrencyResponse = client.get("/latest")
 }
